@@ -1,6 +1,7 @@
+# Recursive implementation for finding number of solutions to $\sum_{i=0}^\infty a_i\cdot 2^i=n$ and $\sum_{i=1}^\infty a_i\cdot (2^i-1)=n$
 from math import *
 
-# index is any integer greater than log_2(n)
+# if index is any integer greater than log_2(n), finds number of solutions to $\sum_{i=0}^\infty a_i\cdot 2^i=n$
 def recursePartitionPowerTwos(n,index):
 	if index == 0:
 		return 1
@@ -9,7 +10,7 @@ def recursePartitionPowerTwos(n,index):
 		count = count + recursePartitionPowerTwos(n-i*(2**index),index-1)
 	return count
 
-# index is any integer greater than log_2(n)
+# if index is any integer greater than log_2(n), finds number of solutions to $\sum_{i=1}^\infty a_i\cdot (2^i-1)=n$
 def recurseSteenrod(n,index):
 	if index == 1:
 		return 1
@@ -18,6 +19,6 @@ def recurseSteenrod(n,index):
 		count = count + recurseSteenrod(n-i*(2**index-1),index-1)
 	return count
   
-# for each i, prints i, then number of solutions to $\sum_{j=0}^\infty a_j\cdot 2^j=i$, then number of solutions to $\sum_{j=1}^\infty a_j\cdot (2^j-1)=i$
+# for each i, prints i, then number of solutions to both equations
 for i in range (1,400):
 	print(i,recursePartitionPowerTwos(i,9), recurseSteenrod(i,9))
